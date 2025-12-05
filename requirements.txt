@@ -1,0 +1,7 @@
+pymc
+arviz
+requests
+seaborn
+pandas
+scikit-learn
+matplotlib
