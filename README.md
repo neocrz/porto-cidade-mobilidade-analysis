@@ -63,6 +63,11 @@ Este projeto foi possível graças a dados abertos de duas fontes governamentais
     *   `seaborn` & `matplotlib`: Visualização de dados.
 
 ## 🚀 Como Reproduzir
+A maneira mais fácil de executar o código é diretamente no seu navegador através do Google Colab.
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/neocrz/porto-cidade-mobilidade-analysis/blob/main/analysis.ipynb)
+
+Alternativamente, para uma instalação local:
 
 1.  Clone o repositório:
     ```bash
@@ -84,7 +89,7 @@ Este projeto foi possível graças a dados abertos de duas fontes governamentais
 ## ✍️ Autor
 
 **Fernando Gomes Cruz**
-*   Ciência de Dados - FATEC Rubens Lara (Santos)
+*   Ciência de Dados - FATEC Rubens Lara
 *   [LinkedIn](https://www.linkedin.com/in/fegcruz/)
 
 ---
