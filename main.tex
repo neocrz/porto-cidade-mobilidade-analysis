@@ -8,7 +8,7 @@ brazil				% Idioma principal
 ]{abntex2}
 
 
-\usepackage{cmap}				% Mapear caracteres especiais
+\usepackage{cmap}				% Caracteres especiais
 \usepackage{lmodern}			% Usa a fonte Latin Modern
 \usepackage[T1]{fontenc}		% Selecao de codigos de fonte
 \usepackage[utf8]{inputenc}		% Codificacao do documento
@@ -25,7 +25,12 @@ brazil				% Idioma principal
 \begin{document}
 	
 	\begin{center}
-		\textbf{\large Entre o Porto e a Cidade: Uma Investigação de Ciência de Dados sobre a Mobilidade na Travessia Santos-Guarujá em Tempos de Pandemia}
+		\textbf{\large Entre o Porto e a Cidade: O Desacoplamento da Demanda na Travessia Santos-Guarujá (2019-2025)}
+		
+		\vspace{0.5cm}
+		
+		\textit{\large Between the Port and the City: Demand Decoupling in the Santos-Guarujá Crossing (2019-2025)}
+		
 		\vspace{1cm}
 		
 		\textbf{Fernando Gomes Cruz} \\
@@ -37,7 +42,7 @@ brazil				% Idioma principal
 	
 	\begin{resumoumacoluna}
 		\begin{otherlanguage*}{portuguese}
-			A travessia de balsas Santos-Guarujá representa um dos principais gargalos logísticos do litoral paulista. Este trabalho propõe uma abordagem de Ciência de Dados para investigar os determinantes do fluxo de veículos nesta travessia entre 2019 e 2025. O objetivo principal foi testar a hipótese de que a atividade econômica portuária (importações) atua como preditora da demanda de mobilidade local. A metodologia envolveu a integração de bases de dados heterogêneas (Dados Abertos SP e ComexStat), engenharia de atributos para tratamento de sazonalidade e a aplicação comparativa de modelos de \textit{Gradient Boosting} (XGBoost) e Regressão Estrutural Bayesiana. Os resultados indicaram que o choque da pandemia de COVID-19 foi o fator determinante na variância dos dados, gerando uma retração estrutural da qual o sistema não se recuperou totalmente. Contrariando a hipótese inicial, a correlação com a atividade econômica mostrou-se fraca, sugerindo um desacoplamento entre o crescimento do porto e a mobilidade urbana da balsa, possivelmente devido à saturação da infraestrutura.
+			A travessia de balsas Santos-Guarujá representa um dos principais gargalos logísticos do litoral paulista. Este trabalho propõe uma abordagem de Ciência de Dados para investigar os determinantes do fluxo de automóveis nesta travessia entre 2019 e 2025. O objetivo principal foi testar a hipótese de que a atividade econômica portuária (importações) atua como preditora da demanda de mobilidade local. A metodologia envolveu a integração de bases de dados heterogêneas, modelagem de sazonalidade discreta por efeitos fixos mensais e a aplicação comparativa de modelos de \textit{Gradient Boosting} (XGBoost) e Regressão Estrutural Bayesiana. O modelo final obteve um $R^2$ de 0,33 e MAPE de 9,29\%. Os resultados indicaram que o choque da pandemia de COVID-19 foi um dos fatores determinantes na variância dos dados, gerando uma retração estrutural no sistema, apresentando a pior tendência secular entre as principais travessias do estado. Contrariando a hipótese inicial, a correlação com a atividade econômica mostrou-se nula, confirmando um desacoplamento entre o crescimento do porto e a mobilidade urbana da balsa, indicativo de saturação da infraestrutura.
 			
 			\vspace{\onelineskip}
 			
@@ -46,9 +51,17 @@ brazil				% Idioma principal
 		\end{otherlanguage*}
 	\end{resumoumacoluna}
 	
-	% ----------------------------------------------------------
-	% INTRODUÇÃO
-	% ----------------------------------------------------------
+	\begin{resumoumacoluna}[Abstract]
+		\begin{otherlanguage*}{english}
+			The Santos-Guarujá ferry crossing represents one of the main logistical bottlenecks on the coast of São Paulo. This work proposes a Data Science approach to investigate the determinants of automobile flow in this crossing between 2019 and 2025. The main objective was to test the hypothesis that port economic activity (imports) acts as a predictor of local mobility demand. The methodology involved the integration of heterogeneous databases, discrete seasonality modeling via monthly fixed effects, and the comparative application of Gradient Boosting (XGBoost) and Bayesian Structural Regression models. The final model achieved an $R^2$ of 0.33 and MAPE of 9.29\%. Results indicated that the COVID-19 pandemic shock was one of the determining factors in data variance, generating a structural retraction in the system, presenting the worst secular trend among the state's main crossings. Contrary to the initial hypothesis, the correlation with economic activity proved null, confirming a decoupling between port growth and ferry urban mobility, indicative of infrastructure saturation.
+			
+			\vspace{\onelineskip}
+			
+			\noindent
+			\textbf{Keywords}: Data Science. Urban Mobility. Time Series. Bayesian Inference. Santos-Guarujá Crossing.
+		\end{otherlanguage*}
+	\end{resumoumacoluna}
+	
 	\section{Introdução}
 	
 	
@@ -64,7 +77,7 @@ brazil				% Idioma principal
 	
 	\subsection{Abordagem por Ciência de Dados}
 	
-	Investigar essa dinâmica exige superar ferramentas analíticas tradicionais. Modelos clássicos de previsão, muitas vezes fundamentados em pressupostos de linearidade, mostram-se insuficientes para capturar rupturas estruturais abruptas como as provocadas pela pandemia \cite{stitchfix}. A volatilidade dos dados e a introdução de variáveis exógenas exigem uma abordagem baseada em Ciência de Dados avançada.
+	Investigar essa dinâmica exige superar ferramentas analíticas tradicionais. Modelos clássicos de previsão, muitas vezes fundamentados em pressupostos de linearidade, mostram-se insuficientes para capturar rupturas estruturais abruptas como as provocadas pela pandemia \cite{stitchfix}. A volatilidade dos dados e a introdução de variáveis exógenas exigem uma abordagem baseada em Ciência de Dados.
 	
 	Nesse sentido, o presente estudo propõe a aplicação de duas técnicas complementares sobre dados públicos do período de 2019 a 2025:
 	\begin{enumerate}
@@ -74,9 +87,7 @@ brazil				% Idioma principal
 	
 	O objetivo deste trabalho é triplo: (1) construir um \textit{pipeline} de dados que integre fontes de transporte e economia; (2) quantificar o "custo de mobilidade" da pandemia em desvios-padrão; e (3) testar a hipótese do desacoplamento porto-cidade, verificando se as variáveis econômicas perderam poder explicativo sobre a mobilidade urbana recente.
 	
-	% ----------------------------------------------------------
-	% REFERENCIAL TEÓRICO
-	% ----------------------------------------------------------
+	
 	\section{Referencial Teórico}
 	
 	A fundamentação teórica desta investigação é construída sobre a interseção de três domínios do conhecimento: a geografia portuária, com foco na relação porto-cidade; a economia dos transportes sob o impacto de choques exógenos; e a ciência de dados aplicada a séries temporais, abrangendo métodos de aprendizado de máquina e inferência bayesiana.
@@ -91,7 +102,7 @@ brazil				% Idioma principal
 	
 	\subsection{Mobilidade em Gargalos Logísticos}
 	
-	A mobilidade em regiões estuarinas apresenta desafios singulares. A Travessia Santos-Guarujá opera como um "monopólio natural" da mobilidade local, sem alternativas viárias competitivas de curta distância. A literatura técnica classifica o sistema como saturado: o Volume Médio Diário (VMD) de veículos coloca o sistema sob estresse constante \cite{modal_connection}.
+	A mobilidade em regiões estuarinas apresenta desafios singulares. A Travessia Santos-Guarujá opera como um "monopólio natural" da mobilidade local, sem alternativas viárias competitivas de curta distância. A literatura técnica classifica o sistema como saturado: o Volume Médio Diário (VMD) de veículos coloca o sistema sob estresse constante.
 	
 	A dependência de um modal sujeito a variáveis ambientais (marés) e mecânicas introduz uma incerteza que penaliza a produtividade regional. Até a concretização de soluções estruturais, como o túnel imerso, a análise deve focar na resiliência do sistema atual de balsas frente a choques de demanda \cite{tribuna_caos}.
 	
@@ -119,236 +130,237 @@ brazil				% Idioma principal
 	\end{equation}
 	Onde $\mu_t$ é a tendência, $S_t$ a sazonalidade e $X_t$ os regressores externos. Utilizando amostragem MCMC (\textit{Markov Chain Monte Carlo}), é possível estimar não apenas o valor médio desses componentes, mas a distribuição de probabilidade inteira (Intervalos de Credibilidade). Isso é fundamental para afirmar, com rigor estatístico, se uma queda de demanda é uma mudança estrutural significativa ou apenas ruído aleatório do sistema \cite{gelman_bayes}.
 	
-	% ----------------------------------------------------------
-	% METODOLOGIA
-	% ----------------------------------------------------------
 	\section{Metodologia}
 	
 	A estratégia metodológica deste estudo foi desenhada para extrair inteligência analítica de fontes de dados governamentais dispersas, integrando-as em um \textit{pipeline} de Ciência de Dados reprodutível. O estudo foi conduzido utilizando a linguagem Python, empregando bibliotecas de manipulação de dados (\textit{Pandas}), aprendizado de máquina (\textit{Scikit-Learn}) e programação probabilística (\textit{PyMC}).
 	
-	A abordagem é quantitativa e estruturada em três fases principais: Aquisição e Tratamento de Dados (ETL), Engenharia de Atributos e Modelagem Híbrida (Frequentista e Bayesiana).
+	A abordagem é quantitativa e estruturada em três fases principais: Aquisição e Tratamento de Dados (ETL), Engenharia de Atributos e Modelagem Híbrida.
 	
 	\subsection{Aquisição e Tratamento de Dados (ETL)}
-	A construção do \textit{dataset} analítico exigiu a federação de dados de domínios distintos — mobilidade e economia — abrangendo o período de Janeiro de 2019 a Outubro de 2025.
+	A construção do \textit{dataset} analítico exigiu a federação de dados de domínios distintos — mobilidade e economia — abrangendo o período de janeiro de 2019 a outubro de 2025.
 	
 	\begin{itemize}
-		\item \textbf{Dados de Mobilidade:} A fonte primária foi o Portal de Dados Abertos do Estado de São Paulo, mantido pela \textbf{Secretaria de Meio Ambiente, Infraestrutura e Logística (SEMIL)} \cite{semil_dados}. Foram utilizados os relatórios mensais de "Volume Transportado nas Travessias Litorâneas". É importante notar que a métrica "Volume Total" agrega veículos e pedestres/ciclistas, mas não contabiliza os passageiros no interior dos veículos, representando o volume de unidades de transporte.
+		\item \textbf{Dados de Mobilidade:} A fonte primária foi o Portal de Dados Abertos do Estado de São Paulo, mantido pela Secretaria de Meio Ambiente, Infraestrutura e Logística (SEMIL). Para isolar a dinâmica turística e pendular motorizada de ruídos causados pela mobilidade ativa, o estudo restringiu o escopo de análise exclusivamente à categoria Automóveis, descartando pedestres e ciclistas.
 		
-		\item \textbf{Dados Econômicos:} Para a atividade portuária, utilizou-se a série de importações (Valor FOB) para os municípios de Santos e Guarujá. Os dados, originários do Sistema Integrado de Comércio Exterior (Siscomex/MDIC), foram obtidos através do repositório de dados da \textbf{Fundação Seade} \cite{seade_comex}.
+		\item \textbf{Dados Econômicos:} Para a atividade portuária, utilizou-se a série de importações (Valor FOB) para os municípios de Santos e Guarujá. Os dados, originários do Sistema Integrado de Comércio Exterior (Siscomex/MDIC), foram obtidos através do repositório da Fundação Seade e agregados mensalmente.
 	\end{itemize}
 	
-	O processo de ETL (\textit{Extract, Transform, Load}) envolveu a raspagem automatizada dos arquivos, padronização temporal e a fusão (\textit{merge}) das bases através da chave de data (Mês/Ano).
+	O processo de ETL envolveu a limpeza de \textit{outliers} operacionais e a sincronização temporal das bases. Para contextualizar o desempenho de Santos-Guarujá, foram também processados dados das demais travessias litorâneas do estado (como São Sebastião/Ilhabela e Cananéia) para fins de comparação de tendências seculares.
 	
-	\subsection{Engenharia de Atributos}
-	Para capturar a complexidade temporal e isolar os efeitos sazonais típicos de cidades litorâneas, foram aplicadas técnicas de Engenharia de Atributos (\textit{Feature Engineering}):
+	\subsection{Engenharia de Atributos e Sazonalidade}
+	A modelagem da sazonalidade exigiu uma abordagem robusta para capturar o comportamento assimétrico do turismo litorâneo, onde picos de demanda (como dezembro e janeiro) não seguem necessariamente uma curva suave.
 	
-	\begin{itemize}
-		\item \textbf{Sazonalidade via Fourier:} Em vez de utilizar os meses como variáveis categóricas simples (1 a 12), optou-se por uma abordagem trigonométrica. Foram criadas variáveis de seno e cosseno ($\sin(\frac{2\pi t}{12})$ e $\cos(\frac{2\pi t}{12})$) para modelar a ciclicidade anual. Isso permite que o modelo matemático compreenda que "Dezembro" é próximo de "Janeiro", preservando a continuidade temporal da alta temporada.
-		\item \textbf{Variável Dummy Pandêmica:} Para modelar o choque exógeno, criou-se uma variável binária ($D_{pan}$) marcando o período crítico de restrições sanitárias e incerteza, definido neste estudo entre Março de 2020 e Junho de 2021.
-		\item \textbf{Normalização:} As variáveis de volume de tráfego e valor econômico foram padronizadas (\textit{StandardScaler}), transformando-as para uma escala com média zero e desvio-padrão unitário, facilitando a comparação dos coeficientes de regressão ($\beta$).
-	\end{itemize}
+	Diferentemente de abordagens clássicas que utilizam funções trigonométricas (séries de Fourier), optou-se por uma modelagem de Sazonalidade Discreta via Efeitos Fixos Mensais. Foi criado um vetor de índices $m \in \{0, ..., 11\}$ representando os meses do ano, permitindo que o modelo probabilístico estimasse um coeficiente independente para cada mês. Essa técnica permite capturar a magnitude exata dos picos de veraneio sem impor a rigidez de uma onda senoidal.
+	
+	Adicionalmente, as variáveis contínuas (volume de tráfego e valor FOB) foram padronizadas (\textit{z-score}) para facilitar a convergência dos algoritmos e a comparação de coeficientes.
 	
 	\subsection{Estratégia Analítica: Modelagem Híbrida}
-	A análise foi conduzida em duas frentes complementares para garantir robustez e interpretabilidade:
+	A análise foi conduzida em três etapas complementares:
+	
+	\subsubsection{Análise Comparativa de Tendências}
+	Preliminarmente, aplicou-se uma regressão linear simplificada a todas as travessias do estado para extrair o componente de tendência secular ($\beta_{trend}$) de cada sistema. O objetivo foi criar um \textit{ranking} de crescimento, permitindo verificar se a estagnação do fluxo é um fenômeno generalizado do litoral ou específico do sistema Santos-Guarujá.
 	
 	\subsubsection{Seleção de Variáveis com Gradient Boosting}
-	Em uma etapa preliminar, utilizou-se o algoritmo \textit{Gradient Boosting Regressor} (implementação Scikit-Learn). Este método de aprendizado de máquina constrói sequencialmente árvores de decisão para minimizar o erro de predição. O objetivo não foi a previsão futura, mas o uso da métrica de \textit{Feature Importance} para testar quais variáveis (Tempo, Valor FOB ou Pandemia) ofereciam maior ganho de informação ao algoritmo \cite{sklearn_gb}. Esta etapa serviu para validar a premissa de que fatores econômicos possuem peso secundário frente à tendência temporal e ao choque pandêmico.
+	Utilizou-se o algoritmo \textit{XGBoost Regressor} para mensurar a importância relativa das variáveis preditoras. Esta etapa de aprendizado de máquina serviu para validar a hierarquia de influência dos atributos, testando empiricamente se a variável econômica (Valor FOB) oferecia ganho de informação superior às variáveis temporais e pandêmicas.
 	
 	\subsubsection{Inferência Estrutural Bayesiana}
-	Para a modelagem principal, adotou-se uma abordagem de Séries Temporais Estruturais Bayesianas (BSTS) utilizando a biblioteca \textit{PyMC}. Diferente de modelos clássicos (como mínimos quadrados), a inferência Bayesiana permite incorporar incertezas nos parâmetros e define o problema através de distribuições de probabilidade \cite{pymc_book}.
+	Para a modelagem explicativa final, adotou-se a abordagem de Séries Temporais Estruturais Bayesianas (BSTS) utilizando a biblioteca \textit{PyMC}. A inferência Bayesiana permitiu incorporar incertezas nos parâmetros e definir a estrutura do fluxo ($Y_t$) através da seguinte equação de regressão:
 	
-	A equação estrutural definida para o fluxo ($Y_t$) foi:
 	\begin{equation}
-		\mu_t = \alpha + \beta_{tend} \cdot t + \beta_{econ} \cdot X_{imp} + \beta_{pan} \cdot D_{pan} + \beta_{saz} \cdot Saz(t)
+		\mu_t = \alpha + \beta_{trend} \cdot t + \beta_{econ} \cdot X_{imp} + \beta_{pan} \cdot D_{pan} + \beta_{saz}[m_t]
 	\end{equation}
 	
-	Para a verossimilhança (\textit{Likelihood}), optou-se pela distribuição \textbf{Student-t} em vez da distribuição Normal tradicional.
-	\begin{equation}
-		Y_t \sim \text{StudentT}(\nu, \mu_t, \sigma)
-	\end{equation}
-	A escolha da Student-t é metodologicamente relevante pois suas "caudas longas" conferem robustez ao modelo contra \textit{outliers} frequentes em dados de transporte (ex: greves, feriados atípicos ou quebras de balsa), evitando que esses eventos distorçam a estimativa da tendência de longo prazo \cite{gelman_bayes}.
+	Onde:
+	\begin{itemize}
+		\item $\beta_{trend}$: coeficiente da tendência secular linear;
+		\item $\beta_{econ}$: elasticidade do fluxo em relação às importações;
+		\item $\beta_{pan}$: impacto do choque exógeno da pandemia (variável \textit{dummy});
+		\item $\beta_{saz}[m_t]$: vetor de 12 coeficientes latentes, onde $m_t$ é o índice do mês no instante $t$.
+	\end{itemize}
 	
-	A inferência dos parâmetros foi realizada via amostragem MCMC (\textit{Markov Chain Monte Carlo}) com 2.000 amostras e 1.000 de \textit{tuning}, gerando Intervalos de Credibilidade de Alta Densidade (HDI) para cada coeficiente.
+	Para a função de verossimilhança (\textit{Likelihood}), manteve-se a distribuição \textbf{Student-t} para conferir robustez contra \textit{outliers}, comuns em dados de transporte sujeitos a interrupções operacionais. A inferência foi realizada via amostragem MCMC (\textit{Markov Chain Monte Carlo}) com 2.000 amostras, gerando Intervalos de Credibilidade de Alta Densidade (HDI) para cada componente estrutural.
 	
-	% ----------------------------------------------------------
-	% RESULTADOS E DISCUSSÃO
-	% ----------------------------------------------------------
-	\section{Resultados e Discussão}
+\section{Resultados e Discussão}
+
+A aplicação da metodologia proposta permitiu caracterizar o perfil da travessia Santos-Guarujá e quantificar os impactos estruturais ocorridos entre janeiro de 2019 e outubro de 2025. É fundamental ressaltar que a análise restringiu-se à categoria de Automóveis, isolando ruídos de outras categorias (como caminhões ou ciclistas) para capturar com maior fidelidade a dinâmica da mobilidade pendular e turística.
+
+\subsection{Tipologia e Contexto Sistêmico}
+
+A análise exploratória inicial buscou situar a Travessia Santos-Guarujá dentro do ecossistema hidroviário estadual. Ao correlacionar a magnitude do fluxo (escala logarítmica) com o Coeficiente de Variação (CV), observou-se uma distinção clara entre travessias de perfil turístico e travessias de perfil urbano.
+
+Conforme ilustrado na Figura \ref{fig:tipologia}, o sistema Santos-Guarujá destaca-se como um \textit{outlier}. O sistema apresenta o maior volume absoluto de tráfego do estado, mas, paradoxalmente, possui um dos menores índices relativos de sazonalidade ($CV < 0,20$). Diferentemente de travessias como Ilhabela ou Cananéia, sujeitas a picos extremos de veraneio e vales profundos, a travessia do Porto opera com uma demanda basal elevada e inelástica durante todo o ano, característica típica de deslocamentos urbanos obrigatórios.
+
+\begin{figure}[H]
+	\centering
+	\caption{Tipologia das Travessias: Volume vs. Sazonalidade (Automóveis)}
+	\includegraphics[width=0.9\linewidth]{assets/fig1_tipologia.png}
+	\fonte{Elaborado pelo autor.}
+	\label{fig:tipologia}
+\end{figure}
+
+Esta constatação sugere que o sistema opera próximo ao limite de sua capacidade física. Nesse cenário, aumentos na demanda potencial tendem a se converter em tempo de fila, e não necessariamente em volume transportado, devido à rigidez da oferta de balsas.
+
+\subsection{Análise Comparativa de Tendências Seculares}
+
+Para verificar a saúde operacional do sistema, isolou-se a tendência secular ($\beta_{trend}$) de todas as travessias litorâneas monitoradas, descontando-se os efeitos sazonais e o choque pontual da pandemia.
+
+Os resultados, apresentados na Figura \ref{fig:ranking}, revelaram uma divergência geográfica significativa. Enquanto travessias situadas nas extremidades do litoral (como São Sebastião/Ilhabela e Iguape) apresentaram coeficientes positivos — indicando crescimento vegetativo da demanda —, a travessia Santos-Guarujá figurou na última posição do ranking estadual, com tendência negativa.
+
+\begin{figure}[H]
+	\centering
+	\caption{Ranking de Tendência Secular das Travessias (2019-2025)}
+	\includegraphics[width=0.9\linewidth]{assets/fig2_ranking.png}
+	\fonte{Elaborado pelo autor.}
+	\label{fig:ranking}
+\end{figure}
+
+Este dado aponta para uma estagnação estrutural no núcleo metropolitano da Baixada Santista. A retração do fluxo de automóveis sugere que a infraestrutura saturada pode estar expulsando usuários para rotas terrestres alternativas (Rodovia Cônego Domênico Rangoni), ainda que estas impliquem em maior distância percorrida.
+
+\subsection{Determinantes do Fluxo: A Abordagem de Aprendizado de Máquina}
+
+A aplicação do algoritmo \textit{Gradient Boosting} (XGBoost) permitiu ranquear as variáveis explicativas quanto à sua contribuição para a redução do erro de predição (Figura \ref{fig:xgboost}).
+
+\begin{figure}[H]
+	\centering
+	\caption{Importância Relativa das Variáveis (XGBoost)}
+	\includegraphics[width=0.8\linewidth]{assets/fig3_xgboost.png}
+	\fonte{Elaborado pelo autor.}
+	\label{fig:xgboost}
+\end{figure}
+
+A análise indicou que a variável temporal ($t$) e a sazonalidade (Mês) são os preditores dominantes. Notavelmente, a variável econômica (Importações/Valor FOB) apresentou baixa relevância explicativa, fornecendo a primeira evidência empírica do desacoplamento: para o algoritmo não-linear, as oscilações no valor movimentado pelo Porto contribuem marginalmente para explicar a variação no número de automóveis na balsa.
+
+\subsection{Inferência Estrutural Bayesiana}
+
+O modelo de regressão estrutural Bayesiana aprofundou essa análise, quantificando a incerteza e a direção dos vetores de força. O modelo final obteve um coeficiente de determinação ($R^2$) de 0,34 e um Erro Percentual Absoluto Médio (MAPE) de 9,26\%, demonstrando robustez no ajuste.
+
+A Tabela \ref{tab:coeficientes} resume os parâmetros estimados.
+
+\begin{table}[H]
+	\centering
+	\caption{Coeficientes Estruturais Estimados (Posterior Summary)}
+	\label{tab:coeficientes}
+	\begin{tabular}{lccc} 
+		\toprule
+		\textbf{Componente} & \textbf{Direção} & \textbf{HDI 95\%} & \textbf{Interpretação} \\ 
+		\midrule
+		Choque Pandemia & Negativo ($\downarrow$) & [-1,49; -0,34] & Retração Severa \\ 
+		Tendência Secular & Negativa ($\downarrow$) & [-0,48; -0,06] & Declínio/Estagnação \\ 
+		Impacto Econômico & Neutro ($\approx 0$) & [-0,01; 0,38] & Desacoplamento \\ 
+		Sazonalidade (Dez) & Positivo ($\uparrow$) & [0,80; 1,55] & Pico Turístico Extremo \\
+		\bottomrule
+	\end{tabular}
+	\fonte{Elaborado pelo autor com base no modelo PyMC.}
+\end{table}
+
+A análise visual dos coeficientes (Figura \ref{fig:bayes_fatores}) confirma três achados centrais:
+
+\begin{figure}[H]
+	\centering
+	\caption{Fatores Estruturais: Tamanho do Efeito e Incerteza}
+	\includegraphics[width=0.85\linewidth]{assets/fig4_fatores.png}
+	\fonte{Elaborado pelo autor.}
+	\label{fig:bayes_fatores}
+\end{figure}
+
+\begin{enumerate}
+	\item \textbf{Desacoplamento Econômico:} O intervalo de credibilidade do impacto econômico cruza a linha do zero. Não há evidência estatística de que o crescimento das importações cause aumento no fluxo de automóveis.
+	\item \textbf{Perfil Sazonal Assimétrico:} A modelagem por efeitos fixos mensais (Figura \ref{fig:sazonal}) revelou que a demanda não segue uma onda suave, mas sim picos abruptos em dezembro e janeiro, contrastando com vales profundos entre abril e junho.
+\end{enumerate}
+
+\begin{figure}[H]
+	\centering
+	\caption{Perfil Sazonal: Coeficientes de Efeito Mensal}
+	\includegraphics[width=0.7\linewidth]{assets/fig5_sazonal.png}
+	\fonte{Elaborado pelo autor.}
+	\label{fig:sazonal}
+\end{figure}
+
+\subsection{Ajuste do Modelo e Projeção}
+
+Por fim, a reconstrução da série temporal (Figura \ref{fig:projecao}) demonstra a aderência do modelo aos dados observados. A área sombreada representa o intervalo de incerteza (90\%).
+
+\begin{figure}[H]
+	\centering
+	\caption{Decomposição Estrutural e Projeção (2019-2025)}
+	\includegraphics[width=\linewidth]{assets/fig6_projecao.png}
+	\fonte{Elaborado pelo autor.}
+	\label{fig:projecao}
+\end{figure}
+
+Observa-se que, apesar da recuperação sazonal projetada para o final de 2025, a tendência média dos dados reais permanece pressionada, seguindo a leve declinação iniciada a partir da recuperação no fim de 2021, não tendo recuperado plenamente os patamares de volume pré-pandemia (2019), confirmando a hipótese de retração estrutural do sistema.
 	
-	A aplicação da metodologia proposta permitiu caracterizar o perfil da travessia e quantificar os impactos estruturais ocorridos entre 2019 e 2025.
+\section{Conclusão}
+
+Este trabalho propôs uma investigação baseada em Ciência de Dados para elucidar a dinâmica de mobilidade na Travessia Santos-Guarujá, focando especificamente na demanda de automóveis. A aplicação de modelos de \textit{Gradient Boosting} e Inferência Bayesiana sobre dados de 2019 a 2025 permitiu refutar a hipótese de acoplamento econômico e revelar um cenário de saturação estrutural.
+
+A principal contribuição empírica foi a demonstração estatística do desacoplamento entre a pujança do Porto de Santos e a mobilidade da travessia. O modelo Bayesiano indicou uma correlação fraca ($\beta_{econ} \approx 0$) entre as importações e o fluxo de veículos leves, sugerindo que a travessia opera sob uma dinâmica urbana saturada, insensível aos ciclos de bonança do comércio exterior.
+
+Adicionalmente, a análise comparativa estadual revelou um dado alarmante: a travessia Santos-Guarujá apresentou uma tendência secular negativa ($\beta_{trend} < 0$) entre os principais sistemas litorâneos. Enquanto travessias periféricas registram crescimento de demanda, o sistema do estuário enfrenta estagnação e declínio no volume de automóveis transportadoss.
+
+A modelagem da sazonalidade por efeitos fixos também evidenciou a extrema dependência dos meses de janeiro e dezembro, exigindo planejamentos operacionais que vão além da média anual.
+
+\begin{thebibliography}{99}
 	
-	\subsection{Tipologia e Contexto Sistêmico}
 	
-	A análise exploratória inicial buscou situar a Travessia Santos-Guarujá dentro do sistema hidroviário estadual. Ao correlacionar a magnitude do fluxo (escala logarítmica) com o Coeficiente de Variação (CV), observou-se uma distinção clara entre travessias turísticas e urbanas.
 	
-	Conforme ilustrado na Figura \ref{fig:tipologia}, Santos-Guarujá destaca-se como um \textit{outlier} no canto superior esquerdo: possui o maior volume absoluto de tráfego e, simultaneamente, o menor índice de sazonalidade ($CV \approx 0.18$). Diferentemente de travessias como Ilhabela ou Cananéia, sujeitas a picos extremos de veraneio, a travessia do Porto opera com uma demanda constante e inelástica, característica de deslocamentos pendulares de trabalho e logística urbana.
+	\bibitem{scielo_covid}
+	ASSOCIAÇÃO NACIONAL DE TRANSPORTES PÚBLICOS (ANTP). \textbf{Impactos da Covid-19 no Transporte Público}. São Paulo: ANTP, 2020.
 	
-	\begin{figure}[H]
-		\centering
-		\caption{Tipologia das Travessias: Urbanas (Estáveis) vs. Turísticas (Sazonais)}
-		\includegraphics[width=0.9\linewidth]{assets/tipologia_das_travessias.png}
-		\fonte{Elaborado pelo autor.}
-		\label{fig:tipologia}
-	\end{figure}
+	\bibitem{bird_anyport}
+	BIRD, J. H. \textbf{Seaports and seaport terminals}. London: Hutchinson, 1971.
 	
-	Esta saturação constante sugere que o sistema opera próximo ao limite de sua capacidade física, onde aumentos na demanda econômica não conseguem ser absorvidos por falta de oferta (espaço nas balsas), resultando em filas em vez de aumento de fluxo transportado.
+	\bibitem{unisanta}
+	PEDROSA, R. A.; NARDI, M. F.; OLIVEIRA, E. J. Os impactos da relação porto/cidade na cidade de Santos sob a perspectiva dos profissionais portuários. \textbf{Anais do Encontro Nacional de Pós-graduação}, Santos, v. 1, n. 1, p. 36-40, 2017.
 	
-	\subsection{Determinantes do Fluxo: A Visão do Machine Learning}
 	
-	Ao aplicar o algoritmo \textit{XGBoost} para identificar quais variáveis explicam melhor a variância dos dados, obteve-se o ranking de importância apresentado na Figura \ref{fig:xgboost}.
+	\bibitem{google_bsts}
+	BRODERSEN, K. H. et al. Inferring causal impact using Bayesian structural time-series models. \textbf{Annals of Applied Statistics}, v. 9, n. 1, p. 247-274, 2015.
 	
-	\begin{figure}[H]
-		\centering
-		\caption{Importância das Variáveis (Feature Importance - XGBoost)}
-		\includegraphics[width=0.8\linewidth]{assets/XGBoos_feature_importance.png}
-		\fonte{Elaborado pelo autor.}
-		\label{fig:xgboost}
-	\end{figure}
+	\bibitem{xgboost_paper}
+	CHEN, T.; GUESTRIN, C. XGBoost: A Scalable Tree Boosting System. In: SIGKDD CONFERENCE ON KNOWLEDGE DISCOVERY AND DATA MINING, 22., 2016, San Francisco. \textbf{Proceedings [...]} New York: ACM, 2016. p. 785–794.
 	
-	O resultado reforça a natureza inercial do sistema. A variável temporal (\textit{t}) domina a capacidade explicativa do modelo, indicando que o fluxo segue uma tendência secular forte. A variável binária da pandemia (\textit{is\_pandemic}) aparece como o segundo fator mais relevante, confirmando o choque estrutural. Notavelmente, a variável econômica (\textit{VALOR\_FOB}), que representa as importações, aparece com menor relevância. Isso sinaliza para o algoritmo que saber o valor movimentado pelo Porto ajuda pouco a prever quantos carros cruzarão a balsa, corroborando a hipótese de desacoplamento.
+	\bibitem{pymc}
+	FONNESBECK, C. et al. \textbf{PyMC: Probabilistic Programming in Python}. Version 5.0. [S.l.]: PyMC Developers, 2024. Disponível em: https://www.pymc.io. Acesso em: 28 nov. 2025.
 	
-	\subsection{Inferência Estrutural Bayesiana}
+	\bibitem{seade_comex}
+	FUNDAÇÃO SEADE. \textbf{Comércio Exterior dos Municípios Paulistas}. São Paulo: Seade, 2025. Disponível em: https://repositorio.seade.gov.br/dataset/comercio-exterior. Acesso em: 05 dez. 2025.
 	
-	Para quantificar a direção e a incerteza desses efeitos, o modelo de regressão Bayesiana decompôs a série temporal. Os coeficientes posteriores ($\beta$), padronizados para comparação, são detalhados na Tabela \ref{tab:coeficientes} e visualizados no \textit{Forest Plot} da Figura \ref{fig:efeitos}.
+	\bibitem{gelman_bayes}
+	GELMAN, A. et al. \textbf{Bayesian Data Analysis}. 3. ed. Boca Raton: CRC Press, 2013.
 	
-	\begin{table}[H]
-		\centering
-		\caption{Coeficientes Estruturais Estimados (Posterior Summary)}
-		\label{tab:coeficientes}
-		\begin{tabular}{lcccc} 
-			\toprule
-			\textbf{Componente} & \textbf{Média ($\beta$)} & \textbf{Desvio Padrão} & \textbf{HDI 95\% (Min, Max)} & \textbf{Impacto} \\ 
-			\midrule
-			Choque Pandemia & -0.925 & 0.295 & [-1.494, -0.340] & \textbf{Forte Retração} \\ 
-			Tendência Secular & -0.271 & 0.108 & [-0.488, -0.069] & \textbf{Declínio Moderado} \\ 
-			Impacto Econômico & 0.180 & 0.100 & [-0.007, 0.384] & \textit{Inconclusivo} \\ 
-			\bottomrule
-		\end{tabular}
-		\fonte{Elaborado pelo autor com base no modelo PyMC.}
-	\end{table}
+	\bibitem{tribuna_caos}
+	FILAS sem fim e horas de espera: travessia de balsas entre Santos e Guarujá vive caos. \textbf{A Tribuna}, Santos, 04 dez. 2024. Disponível em: https://www.atribuna.com.br. Acesso em: 05 dez. 2025.
 	
-	\begin{figure}[H]
-		\centering
-		\caption{Tamanho do Efeito e Incerteza (Intervalos de Credibilidade de 95\%)}
-		\includegraphics[width=0.8\linewidth]{assets/tamanho_do_efeito_e_incerteza.png}
-		\fonte{Elaborado pelo autor.}
-		\label{fig:efeitos}
-	\end{figure}
+	\bibitem{hoylet}
+	HOYLE, B. S. Global and local change on the port-city interface: the case of East African seaports. \textbf{GeoJournal}, v. 48, n. 2, p. 147-158, 1999.
 	
-	A análise dos coeficientes revela três achados fundamentais:
+	\bibitem{jornal_usp}
+	MUDANÇAS no transporte coletivo aumentaram risco de contágio. \textbf{Jornal da USP}, São Paulo, 2020. Disponível em: https://jornal.usp.br. Acesso em: 10 jan. 2025.
 	
-	\begin{enumerate}
-		\item \textbf{A Magnitude da Crise:} O coeficiente da pandemia ($\beta \approx -0.92$) é, de longe, o mais expressivo, indicando uma queda de quase um desvio-padrão completo no fluxo durante o período de restrições. A incerteza (barra azul na Figura \ref{fig:efeitos}) é larga, refletindo a volatilidade dos meses de \textit{lockdown}.
-		
-		\item \textbf{Declínio Estrutural:} A "Tendência de Longo Prazo" apresenta um coeficiente negativo ($\beta \approx -0.27$) com intervalo de credibilidade que não cruza o zero (o limite superior é -0.069). Isso fornece evidência estatística de que a travessia está encolhendo em volume ao longo do tempo (2019-2025), independentemente da pandemia. Fatores como a precarização do serviço e a migração para trabalho remoto podem explicar esse fenômeno.
-		
-		\item \textbf{Desacoplamento Econômico:} O coeficiente econômico é positivo ($\beta \approx 0.18$), mas estatisticamente fraco. O intervalo de credibilidade de 95\% inicia em -0.007, cruzando o zero. Em termos bayesianos, isso significa que não há certeza suficiente para afirmar que o aumento das importações causa aumento no fluxo da balsa. O tráfego pesado portuário parece utilizar rotas alternativas (rodovias), enquanto a balsa permanece restrita à dinâmica urbana.
-	\end{enumerate}
+	\bibitem{antagonismo}
+	MODAL CONNECTION. \textbf{Túnel Santos-Guarujá: marco para a logística brasileira}. 2024. Disponível em: https://modalconnection.com.br/modais/tunel-santos-guaruja-marco-para-a-logistica-brasileira/. Acesso em: 05 dez. 2025.
 	
-	\subsection{Ajuste do Modelo e Tendência Secular}
+	\bibitem{conflito_espaco}
+	ORNELAS, R. S. \textbf{Relação porto/cidade: o caso de Santos}. 2009. Dissertação (Mestrado em Geografia Humana) - Universidade de São Paulo, São Paulo, 2009.
 	
-	Por fim, a reconstrução da série temporal (Figura \ref{fig:ajuste}) demonstra a aderência do modelo aos dados reais ($R^2 = 0.26$, MAPE $= 7.01\%$). Embora o coeficiente de determinação pareça moderado, o MAPE baixo indica que o modelo captura bem a tendência central e a sazonalidade.
+	\bibitem{pedrosa_santos}
+	PEDROSA, R. A. Os impactos da relação porto/cidade na cidade de Santos sob a perspectiva dos profissionais portuários. \textbf{Revista Ceciliana}, Santos, v. 4, n. 1, p. 25-35, 2012.
 	
-	\begin{figure}[H]
-		\centering
-		\caption{Decomposição Estrutural e Ajuste do Modelo Bayesiano (2019-2025)}
-		\includegraphics[width=\linewidth]{assets/decomposição_estrutural_e_ajuste.png}
-		\fonte{Elaborado pelo autor.}
-		\label{fig:ajuste}
-	\end{figure}
+	\bibitem{sklearn_gb}
+	PEDREGOSA, F. et al. Scikit-learn: Machine Learning in Python. \textbf{Journal of Machine Learning Research}, v. 12, p. 2825-2830, 2011.
 	
-	Observa-se visualmente a ruptura abrupta em 2020 (área sombreada em vermelho) e uma recuperação lenta que, em 2024-2025, ainda luta para ultrapassar os patamares de 2019, confirmando a tendência secular negativa detectada pelos parâmetros. A inclusão da distribuição Student-t na verossimilhança permitiu que o modelo acomodasse os pontos extremos (pontos pretos dispersos) sem perder a capacidade de generalização da linha de tendência (linha laranja).
+	\bibitem{semil_dados}
+	SÃO PAULO (Estado). Secretaria de Meio Ambiente, Infraestrutura e Logística. \textbf{Volume Transportado nas Travessias Litorâneas}. São Paulo, 2025. Disponível em: https://dadosabertos.sp.gov.br/dataset/volume-trav-lit. Acesso em: 05 dez. 2025.
 	
-	% ----------------------------------------------------------
-	% CONCLUSÃO
-	% ----------------------------------------------------------
-	\section{Conclusão}
+	\bibitem{scielo_mobilidade}
+	SILVA, A. B. Impactos da Covid-19 na Mobilidade e na Acessibilidade. \textbf{Revista dos Transportes Públicos}, v. 42, p. 55-67, 2021.
 	
-	Este trabalho propôs uma investigação baseada em dados para elucidar a dinâmica de mobilidade na Travessia Santos-Guarujá, testando a hipótese de que o vigor econômico do Porto de Santos atuaria como principal indutor do fluxo de veículos na balsa. A aplicação de modelos de \textit{Gradient Boosting} e Inferência Bayesiana sobre dados de 2019 a 2025 permitiu refutar parcialmente essa premissa e revelar uma realidade mais complexa.
+	\bibitem{stitchfix}
+	STITCH FIX. \textbf{Sorry ARIMA, but I'm Going Bayesian}. 2016. Disponível em: https://multithreaded.stitchfix.com/blog/2016/04/21/forget-arima/. Acesso em: 20 dez. 2025.
 	
-	A principal contribuição empírica do estudo foi a constatação estatística do desacoplamento entre a atividade portuária e a mobilidade urbana da travessia. O modelo Bayesiano indicou que, enquanto as importações (Valor FOB) oscilam com a dinâmica do comércio exterior, o fluxo da balsa permanece insensível a essas variações ($\beta_{econ} \approx 0$, com intervalo de credibilidade inconclusivo). Isso sugere que a travessia atende majoritariamente a uma demanda demográfica e pendular, saturada, que não responde linearmente aos ciclos de bonança do comércio internacional.
+	\bibitem{stitchfix_arima}
+	TAYLOR, S. J.; LETHAM, B. Forecasting at Scale. \textbf{The American Statistician}, v. 72, n. 1, p. 37-45, 2018.
 	
-	Além disso, identificou-se uma tendência secular negativa ($\beta_{trend} < 0$) que persiste para além do choque da pandemia. O sistema não apenas não recuperou o volume de tráfego pré-2020, como apresenta sinais de retração estrutural. Hipotetiza-se que fatores não observados neste modelo — como a precarização do tempo de espera, a falta de embarcações operacionais e a consolidação do trabalho remoto em setores de serviços — estejam expulsando usuários do sistema, forçando a busca por rotas terrestres mais longas.
-	
-	Em suma, a travessia Santos-Guarujá comporta-se como um gargalo de oferta rígida. O baixo coeficiente de determinação ($R^2 \approx 0.26$) não denota falha do modelo, mas sim que a demanda é reprimida por restrições físicas de capacidade que a variável econômica não consegue capturar.
-	
-	Para trabalhos futuros, recomenda-se a incorporação de dados operacionais do lado da oferta (número de balsas em operação por hora e tempo médio de fila) para refinar a explicação da variância residual. A Ciência de Dados demonstrou que, para resolver o nó da mobilidade no estuário, não basta olhar para o crescimento do Porto; é necessário resolver as fricções internas da infraestrutura que conecta as cidades.
-	
-	% ----------------------------------------------------------
-	% REFERÊNCIAS
-	% ----------------------------------------------------------
-	\begin{thebibliography}{99}
-		\bibitem{antagonismo}
-		MODALCONNECTION. \textbf{Túnel Santos-Guarujá: marco para a logística brasileira} . Disponível em: <https://modalconnection.com.br/modais/tunel-santos-guaruja-marco-para-a-logistica-brasileira/>. Acesso em: 05 dez. 2025.
-		
-		\bibitem{bird_anyport}
-		BIRD, J. H. \textbf{Seaports and seaport terminals}. London: Hutchinson, 1971.
-		
-		
-		\bibitem{conflito_espaco}
-		ORNELAS, R. S. \textbf{Relação porto/cidade: o caso de Santos}. Dissertação (Mestrado) - Universidade de São Paulo, 2009.
-		
-		
-		\bibitem{gelman}
-		GELMAN, Andrew et al. \textbf{Bayesian Data Analysis}. 3. ed. Boca Raton: CRC Press, 2013.
-		
-		\bibitem{google_bsts}
-		BRODERSEN, K. H. et al. Inferring causal impact using Bayesian structural time-series models. \textbf{Annals of Applied Statistics}, v. 9, n. 1, p. 247-274, 2015.
-		
-		\bibitem{hoylet}
-		HOYLE, B. S. Global and local change on the port-city interface: the case of East African seaports. \textbf{GeoJournal}, v. 48, n. 2, p. 147-158, 1999.
-		
-		\bibitem{gelman_bayes}
-		GELMAN, A. et al. \textbf{Bayesian Data Analysis}. 3. ed. CRC Press, 2013.
-		
-		\bibitem{google_bsts}
-		BRODERSEN, K. H. et al. Inferring causal impact using Bayesian structural time-series models. \textbf{Annals of Applied Statistics}, v. 9, n. 1, p. 247-274, 2015.
-		
-		\bibitem{jornal_usp}
-		JORNAL DA USP. \textbf{Mudanças no transporte coletivo aumentaram risco de contágio}. Disponível em: <https://jornal.usp.br>. Acesso em: 2025.
-		
-		\bibitem{modal_connection}
-		MODAL CONNECTION. \textbf{Túnel Santos-Guarujá: Impacto na Logística Brasileira}. Disponível em: <https://modalconnection.com.br>. Acesso em: 2025.
-		
-		\bibitem{pedrosa_santos}
-		PEDROSA, R. A. Os impactos da relação porto/cidade na cidade de Santos sob a perspectiva dos profissionais portuários. \textbf{Revista Ceciliana}, v. 4, n. 1, 2012.
-		
-		\bibitem{pymc_book}
-		FONNESBECK, C. et al. \textbf{PyMC: Probabilistic Programming in Python}. Version 5.0. 2024. Disponível em: <https://www.pymc.io>.
-		
-		\bibitem{pymc}
-		FONNESBECK, Chris et al. \textbf{PyMC: Bayesian Modeling in Python}. Disponível em: <https://www.pymc.io>. Acesso em: 28 nov. 2025.
-		
-		\bibitem{scielo_covid}
-		ANTP. \textbf{Impactos da Covid-19 no Transporte Público}. Associação Nacional de Transportes Públicos, 2020.
-		
-		\bibitem{scielo_mobilidade}
-		SCIELO. Impactos da Covid-19 na Mobilidade e na Acessibilidade. Acesso em 2025.
-		
-		\bibitem{seade_comex}
-		FUNDAÇÃO SEADE. \textbf{Comércio Exterior dos Municípios Paulistas}. Repositório de Dados. Fonte: MDIC/Siscomex. Disponível em: <https://repositorio.seade.gov.br/dataset/comercio-exterior>. Acesso em: 05 dez. 2025.
-		
-		\bibitem{semil_dados}
-		SÃO PAULO (Estado). Secretaria de Meio Ambiente, Infraestrutura e Logística. \textbf{Volume Transportado nas Travessias Litorâneas}. Portal de Dados Abertos. Disponível em: <https://dadosabertos.sp.gov.br/dataset/volume-trav-lit>. Acesso em: 05 dez. 2025.
-		
-		\bibitem{sklearn_gb}
-		PEDREGOSA, F. et al. Scikit-learn: Machine Learning in Python. \textbf{Journal of Machine Learning Research}, v. 12, p. 2825-2830, 2011.
-		
-		\bibitem{stitchfix}
-		STITCH FIX. Sorry ARIMA, but I'm Going Bayesian. 2016.
-		
-		\bibitem{stitchfix_arima}
-		TAYLOR, S. J.; LETHAM, B. Forecasting at Scale. \textbf{The American Statistician}, v. 72, n. 1, p. 37-45, 2018.
-		
-		\bibitem{tribuna_caos}
-		A TRIBUNA. \textbf{Filas sem fim e horas de espera: travessia de balsas entre Santos e Guarujá vive caos}. Publicado em: 04 dez. 2024.
-		
-		\bibitem{unisanta}
-		PEDROSA, R. A. Os impactos da relação porto/cidade na cidade de Santos. Periodicos Unisanta.
-		
-		\bibitem{xgboost_paper}
-		CHEN, T.; GUESTRIN, C. XGBoost: A Scalable Tree Boosting System. In: \textbf{KDD '16}. ACM, 2016. p. 785–794.
-		
-	\end{thebibliography}
-	
+\end{thebibliography}
 \end{document}
